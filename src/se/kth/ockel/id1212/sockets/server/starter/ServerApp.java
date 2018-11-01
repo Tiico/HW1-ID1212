@@ -10,7 +10,7 @@ public class ServerApp {
         if (args.length > 0) {
             SERVER_PORT = Integer.parseInt(args[0]);
         }
-        ServerController serverController = new ServerController(SERVER_PORT);
+        new ServerController(SERVER_PORT);
     }
 
 }

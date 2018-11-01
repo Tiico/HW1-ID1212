@@ -7,7 +7,6 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 public class ConnectionHandler {
-    private static final int LINGER_TIME = 5000;
 
     private ServerController serverController;
 
@@ -16,7 +15,6 @@ public class ConnectionHandler {
         try(ServerSocket serverSocket = new ServerSocket(port)){
             while (true){
                 Socket socket = serverSocket.accept();
-                socket.setSoLinger(true, LINGER_TIME);
                 Thread handlerThread = new Thread(new RequestHandler(socket, serverController));
                 handlerThread.setPriority(Thread.MAX_PRIORITY);
                 handlerThread.start();

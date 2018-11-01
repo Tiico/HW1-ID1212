@@ -2,9 +2,8 @@ package se.kth.ockel.id1212.sockets.server.net;
 
 import se.kth.ockel.id1212.sockets.server.controller.ServerController;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+
+import java.io.*;
 import java.net.Socket;
 
 public class RequestHandler implements Runnable {
@@ -24,6 +23,13 @@ public class RequestHandler implements Runnable {
             String inputString = null;
             while ((inputString = reader.readLine()) != null) {
                 System.out.println("Input: " + inputString);
+                BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
+                writer.write("du sa: " + inputString);
+                writer.flush();
+                //serverController.parseCommand(inputString);
+                if (inputString.equalsIgnoreCase("exit")) {
+                    break;
+                }
             }
 
         } catch (IOException e) {
